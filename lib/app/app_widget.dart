@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/pages/login/login_page.dart';
+import 'package:pokedex/app/routes/routes.dart';
 
 class AppWidget extends StatefulWidget {
   const AppWidget({Key? key}) : super(key: key);
@@ -11,9 +12,10 @@ class AppWidget extends StatefulWidget {
 class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      initialRoute: '/',
+      onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
     );
   }
 }
