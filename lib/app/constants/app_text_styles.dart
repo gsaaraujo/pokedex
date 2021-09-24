@@ -9,6 +9,12 @@ class AppTextStyles {
     color: AppColors.heading100,
   );
 
+  static final headingLoginPage = GoogleFonts.inter(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: AppColors.heading100,
+  );
+
   static final headerHeading = GoogleFonts.inter(
     fontSize: 18,
     fontWeight: FontWeight.normal,
