@@ -4,8 +4,9 @@ import 'package:pokedex/app/models/user_model.dart';
 
 class AuthServices {
   final FirebaseAuth auth;
+  final GoogleSignIn googleSignIn;
 
-  AuthServices(this.auth);
+  AuthServices(this.auth, this.googleSignIn);
 
   Stream<UserModel?> authStateChanges() {
     return auth.authStateChanges().map((user) {
@@ -19,7 +20,7 @@ class AuthServices {
   }
 
   Future<void> signInWithGoogle() async {
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
     if (googleUser != null) {
       try {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:pokedex/app/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,13 +17,15 @@ class AppWidget extends StatefulWidget {
 
 class _AppWidgetState extends State<AppWidget> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final GoogleSignIn _google = GoogleSignIn();
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         StreamProvider<UserModel?>.value(
-            value: AuthServices(_auth).authStateChanges(), initialData: null),
+            value: AuthServices(_auth, _google).authStateChanges(),
+            initialData: null),
         ChangeNotifierProvider<LoginController>(
           create: (_) => LoginController(),
         ),
