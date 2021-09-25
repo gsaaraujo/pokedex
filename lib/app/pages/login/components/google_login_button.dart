@@ -4,14 +4,26 @@ import 'package:pokedex/app/constants/app_assets_path.dart';
 import 'package:pokedex/app/constants/app_colors.dart';
 import 'package:pokedex/app/constants/app_text_styles.dart';
 
-class GoogleLoginButton extends StatelessWidget {
-  const GoogleLoginButton({Key? key}) : super(key: key);
+class GoogleLoginButton extends StatefulWidget {
+  GoogleLoginButton(
+      {Key? key, required this.handleOnTap, required this.isLoading})
+      : super(key: key);
 
+  bool isLoading = false;
+  final VoidCallback handleOnTap;
+
+  @override
+  State<GoogleLoginButton> createState() => _GoogleLoginButtonState();
+}
+
+class _GoogleLoginButtonState extends State<GoogleLoginButton> {
   @override
   Widget build(BuildContext context) {
     return Material(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          widget.handleOnTap();
+        },
         child: Container(
           height: 56,
           decoration: BoxDecoration(
@@ -32,9 +44,12 @@ class GoogleLoginButton extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: Text('Connect with Google',
-                      style: AppTextStyles.heading,
-                      textAlign: TextAlign.center)),
+                child: Text(
+                  'Connect with Google',
+                  style: AppTextStyles.heading,
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),

@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import 'package:pokedex/app/constants/app_assets_path.dart';
 import 'package:pokedex/app/constants/app_text_styles.dart';
 import 'package:pokedex/app/pages/login/components/google_login_button.dart';
+import 'package:pokedex/app/pages/login/login_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -12,26 +14,38 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
-  late final AnimationController _controller;
+  late final AnimationController _animationController;
 
   @override
   void initState() {
     super.initState();
 
-    _controller = AnimationController(
+    final _controller = context.read<LoginController>();
+
+    _animationController = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 9),
     );
+
+    _controller.addListener(() {
+      if (_controller.isAuthFailed) {
+        const snackBar = SnackBar(content: Text('Authentication has failed.'));
+
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    });
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final _controller = context.read<LoginController>();
+
     return Scaffold(
       body: Center(
         child: Column(
@@ -42,7 +56,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               AppAssetsPath.pokeballAnimatedJson,
               width: 140,
               height: 126.25,
-              controller: _controller..forward(),
+              controller: _animationController..forward(),
             ),
             const SizedBox(height: 45),
             Padding(
@@ -63,9 +77,16 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               ),
             ),
             const SizedBox(height: 183),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 43),
-              child: GoogleLoginButton(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 43),
+              child: GoogleLoginButton(
+                handleOnTap: () {
+                  _controller.isLoading == true
+                      ? null
+                      : _controller.signInWithGoogle();
+                },
+                isLoading: _controller.isLoading,
+              ),
             ),
           ],
         ),
