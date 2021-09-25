@@ -8,7 +8,7 @@ import 'package:pokedex/app/constants/app_routes_name.dart';
 class Routes {
   static Route<dynamic>? onGenerateRoute(settings) {
     switch (settings.name) {
-      case AppRoutesName.loginPage:
+      case AppRoutesName.wrapper:
         return MaterialPageRoute(builder: (_) => const WrapperWidget());
       default:
         return MaterialPageRoute(builder: (_) => const WrapperWidget());
@@ -21,7 +21,7 @@ class WrapperWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final user = context.read<UserModel?>();
+    final user = context.watch<UserModel?>();
 
     if (user == null) {
       return const LoginPage();

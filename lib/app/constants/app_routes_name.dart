@@ -1,4 +1,4 @@
 class AppRoutesName {
-  static const loginPage = '/';
+  static const wrapper = '/';
   static const homePage = '/home';
 }

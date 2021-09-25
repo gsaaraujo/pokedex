@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pokedex/app/constants/app_colors.dart';
+import 'package:pokedex/app/pages/home/home_controller.dart';
+import 'package:pokedex/app/pages/home/home_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pokedex/app/routes/routes.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -29,11 +32,14 @@ class _AppWidgetState extends State<AppWidget> {
         ChangeNotifierProvider<LoginController>(
           create: (_) => LoginController(),
         ),
+        ChangeNotifierProvider<HomeController>(
+          create: (_) => HomeController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutesName.loginPage,
         onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
+        color: AppColors.background,
       ),
     );
   }

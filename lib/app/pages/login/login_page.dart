@@ -81,9 +81,7 @@ class _LoginPageState extends State<LoginPage> with TickerProviderStateMixin {
               padding: const EdgeInsets.symmetric(horizontal: 43),
               child: GoogleLoginButton(
                 handleOnTap: () {
-                  _controller.isLoading == true
-                      ? null
-                      : _controller.signInWithGoogle();
+                  _controller.isLoading ? null : _controller.signInWithGoogle();
                 },
                 isLoading: _controller.isLoading,
               ),
