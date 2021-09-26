@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 class AppColors {
   static const header = ([Color(0xFFFCD20B), Color(0xFFFAE55B)]);
   static const background = Color(0xFFFFFFFF);
+  static const backgroundOpacity = Color.fromRGBO(255, 255, 255, 0.2);
 
   static const heading100 = Color(0xFF464646);
   static const heading0 = Color(0xFFFFFFFF);

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pokedex/app/pages/home/components/pokemon_item.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pokedex/app/models/user_model.dart';
@@ -35,8 +36,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -116,6 +119,19 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           const SizedBox(height: 31),
+          Expanded(
+            child: GridView.builder(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    childAspectRatio: 0.7375),
+                itemBuilder: (context, index) {
+                  return PokemonItem();
+                }),
+          )
         ],
       ),
     );

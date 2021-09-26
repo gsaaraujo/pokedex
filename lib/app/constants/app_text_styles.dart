@@ -30,13 +30,13 @@ class AppTextStyles {
   static final pokemonCollectionTitle = GoogleFonts.inter(
     fontSize: 18,
     fontWeight: FontWeight.bold,
-    color: AppColors.heading100,
+    color: AppColors.heading0,
   );
 
   static final pokemonCollectionSubtitle = GoogleFonts.inter(
     fontSize: 14,
     fontWeight: FontWeight.bold,
-    color: AppColors.heading100,
+    color: AppColors.heading0,
   );
 
   static final pokemonDetailsTitle = GoogleFonts.inter(
