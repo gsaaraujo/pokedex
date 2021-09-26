@@ -6,5 +6,6 @@ class AppAssetsPath {
   static const googleSvg = "assets/images/google.svg";
   static const pikachuSvg = "assets/images/pikachu.svg";
   static const lineSvg = "assets/images/line.svg";
+  static const searchSvg = "assets/images/search.svg";
   static const pokeballAnimatedJson = "assets/animations/pokeballAnimated.json";
 }
