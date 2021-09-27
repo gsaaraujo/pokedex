@@ -14,18 +14,19 @@ class PokemonItemTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: AppColors.backgroundOpacity,
-        borderRadius: BorderRadius.circular(10),
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: AppColors.backgroundOpacity,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Text(title[0].toUpperCase() + title.substring(1).toLowerCase(),
+            style: AppTextStyles.pokemonCollectionTitle.merge(
+              TextStyle(fontSize: fontSize),
+            )),
       ),
-      child: Text(title,
-          style: AppTextStyles.pokemonCollectionTitle.merge(
-            TextStyle(fontSize: fontSize),
-          )),
     );
   }
 }

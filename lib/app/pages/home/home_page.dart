@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/pages/home/components/pokemon_item.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -36,6 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    final _controller = context.watch<HomeController>();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -120,16 +122,37 @@ class _HomePageState extends State<HomePage> {
           ),
           const SizedBox(height: 31),
           Expanded(
-            child: GridView.builder(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 0, horizontal: 20),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 0.7375),
-                itemBuilder: (context, index) {
-                  return PokemonItem();
+            child: FutureBuilder<List<PokemonModel>?>(
+                future: _controller.getPokemonCollection(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return GridView.builder(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 20),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: 0.7375),
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (context, index) {
+                          return PokemonItem(pokemon: snapshot.data![index]);
+                        });
+                  }
+
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text('Something went wrong',
+                          style: AppTextStyles.heading),
+                    );
+                  }
+
+                  return const Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.buttonBorder,
+                    ),
+                  );
                 }),
           )
         ],
