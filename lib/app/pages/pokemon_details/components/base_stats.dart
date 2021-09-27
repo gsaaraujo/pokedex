@@ -26,7 +26,7 @@ class BaseStats extends StatelessWidget {
         ),
         Container(
           height: 2,
-          width: (stat * 2.5),
+          width: (stat * 1.0),
           color: AppColors.baseStatsLineType2,
         ),
       ],

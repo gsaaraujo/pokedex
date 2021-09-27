@@ -38,6 +38,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final _controller = context.watch<HomeController>();
+    final _user = context.watch<UserModel>();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -76,17 +77,24 @@ class _HomePageState extends State<HomePage> {
                           },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(5),
-                            child: Image.asset(
-                              AppAssetsPath.defaultUserPhotoJpg,
-                              width: 48,
-                              height: 48,
-                              fit: BoxFit.cover,
-                            ),
+                            child: _user.photoURL == null
+                                ? Image.asset(
+                                    AppAssetsPath.defaultUserPhotoJpg,
+                                    width: 48,
+                                    height: 48,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.network(
+                                    _user.photoURL!,
+                                    width: 48,
+                                    height: 48,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                         ),
                         const SizedBox(width: 20),
                         Text(
-                          'Hi, Gabriel',
+                          'Hi, ${_user.name}',
                           style: AppTextStyles.headerHeading,
                         ),
                       ],
@@ -105,6 +113,9 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
+              onChanged: (text) {
+                _controller.textField(text);
+              },
               maxLength: 20,
               decoration: InputDecoration(
                 counterText: "",
@@ -125,7 +136,15 @@ class _HomePageState extends State<HomePage> {
             child: FutureBuilder<List<PokemonModel>?>(
                 future: _controller.getPokemonCollection(),
                 builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.buttonBorder,
+                      ),
+                    );
+                  }
                   if (snapshot.hasData) {
+                    print('sim');
                     return GridView.builder(
                         padding: const EdgeInsets.symmetric(
                             vertical: 0, horizontal: 20),

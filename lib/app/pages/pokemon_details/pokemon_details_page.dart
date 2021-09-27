@@ -149,7 +149,7 @@ class PokemonDetailsPage extends StatelessWidget {
                     tag: pokemon.sprites,
                     child: SizedBox(
                       width: size.width * 0.427,
-                      height: size.height * 0.19,
+                      height: size.height * 0.23,
                       child: SvgPicture.network(
                         pokemon.sprites,
                         fit: BoxFit.contain,
