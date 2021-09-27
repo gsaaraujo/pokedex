@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/models/user_model.dart';
+import 'package:pokedex/app/pages/pokemon_details/pokemon_details_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pokedex/app/pages/home/home_page.dart';
 import 'package:pokedex/app/pages/login/login_page.dart';
@@ -10,6 +12,10 @@ class Routes {
     switch (settings.name) {
       case AppRoutesName.wrapper:
         return MaterialPageRoute(builder: (_) => const WrapperWidget());
+      case AppRoutesName.pokemonDetailsPage:
+        var data = settings.arguments as PokemonModel;
+        return MaterialPageRoute(
+            builder: (_) => PokemonDetailsPage(pokemon: data));
       default:
         return MaterialPageRoute(builder: (_) => const WrapperWidget());
     }

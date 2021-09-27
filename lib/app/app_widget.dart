@@ -39,7 +39,7 @@ class _AppWidgetState extends State<AppWidget> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: (settings) => Routes.onGenerateRoute(settings),
-        color: AppColors.background,
+        theme: ThemeData(scaffoldBackgroundColor: AppColors.background),
       ),
     );
   }

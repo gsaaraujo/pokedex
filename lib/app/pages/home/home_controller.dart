@@ -8,7 +8,7 @@ import 'package:pokedex/app/services/auth_services.dart';
 class HomeController extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn google = GoogleSignIn();
-  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=20';
+  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=13';
   bool isAuthFailed = false;
   bool isLoading = false;
 
