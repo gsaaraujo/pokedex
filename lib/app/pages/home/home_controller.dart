@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +10,9 @@ import 'package:pokedex/app/repositories/pokemon_repository/pokemon_repository.d
 import 'package:pokedex/app/services/auth_services.dart';
 
 class HomeController extends ChangeNotifier {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final GoogleSignIn google = GoogleSignIn();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final GoogleSignIn _google = GoogleSignIn();
   final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=30';
 
   List<PokemonModel>? pokemonCollection;
@@ -49,7 +51,7 @@ class HomeController extends ChangeNotifier {
       isLoading = true;
       notifyListeners();
 
-      await AuthServices(auth, google).signOut();
+      await AuthServices(_auth, _google, _firestore).signOut();
     } catch (e) {
       isAuthFailed = true;
     } finally {

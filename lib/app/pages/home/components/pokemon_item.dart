@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pokedex/app/components/pokemon_favorite.dart';
 import 'package:pokedex/app/constants/app_colors.dart';
 import 'package:pokedex/app/constants/app_routes_name.dart';
 import 'package:pokedex/app/constants/app_text_styles.dart';
@@ -65,20 +66,7 @@ class PokemonItem extends StatelessWidget {
                             )
                             .toList(),
                       ),
-                      Container(
-                        width: 50,
-                        height: 50,
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundOpacity,
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: IconButton(
-                          icon: const Icon(Icons.favorite_border),
-                          color: AppColors.heartIconBorder,
-                          iconSize: 28,
-                          onPressed: () {},
-                        ),
-                      ),
+                      PokemonFavorite(),
                     ],
                   ),
                 ],
