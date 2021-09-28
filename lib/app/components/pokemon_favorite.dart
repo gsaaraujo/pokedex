@@ -35,27 +35,26 @@ class _PokemonFavoriteState extends State<PokemonFavorite> {
       onTap: () {
         setState(() {
           isFavorite = !isFavorite;
-          // _controller.addFavorite(widget.pokemon, isFavorite);
-          _controller.getFavoritePokemon();
+          _controller.addFavorite(widget.pokemon, isFavorite);
         });
       },
       child: Container(
-        width: 50,
-        height: 50,
+        width: 56,
+        height: 56,
         decoration: BoxDecoration(
           color: AppColors.backgroundOpacity,
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(28),
         ),
         child: isFavorite == false
             ? const Icon(
                 Icons.favorite_border_outlined,
                 color: AppColors.heartIconBorder,
-                size: 28,
+                size: 30,
               )
             : const Icon(
                 Icons.favorite_outlined,
                 color: AppColors.heartIconFilled,
-                size: 28,
+                size: 30,
               ),
       ),
     );

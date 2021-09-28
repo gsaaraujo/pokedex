@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:pokedex/app/components/pokemon_favorite.dart';
 import 'package:pokedex/app/components/pokemon_item_title.dart';
 import 'package:pokedex/app/constants/app_assets_path.dart';
 import 'package:pokedex/app/constants/app_colors.dart';
@@ -32,8 +33,14 @@ class PokemonDetailsPage extends StatelessWidget {
       extendBodyBehindAppBar: true,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
         elevation: 0.0,
+        actions: [
+          PokemonFavorite(pokemon: pokemon),
+          const SizedBox(
+            width: 20,
+          )
+        ],
+        backgroundColor: Colors.transparent,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
