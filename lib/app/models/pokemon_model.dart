@@ -6,7 +6,6 @@ class PokemonModel {
   final List<Map<String, dynamic>> types;
   final int height;
   final int weight;
-  final List<Map<String, dynamic>> moves;
   final List<Map<String, dynamic>> stats;
   final String sprites;
 
@@ -16,7 +15,6 @@ class PokemonModel {
     required this.types,
     required this.height,
     required this.weight,
-    required this.moves,
     required this.stats,
     required this.sprites,
   });
@@ -28,7 +26,6 @@ class PokemonModel {
       'types': types,
       'height': height,
       'weight': weight,
-      'moves': moves,
       'stats': stats,
       'sprites': sprites,
     };
@@ -41,7 +38,6 @@ class PokemonModel {
       types: List<Map<String, dynamic>>.from(map['types']?.map((x) => x)),
       height: map['height'],
       weight: map['weight'],
-      moves: List<Map<String, dynamic>>.from(map['moves']?.map((x) => x)),
       stats: List<Map<String, dynamic>>.from(map['stats']?.map((x) => x)),
       sprites: map['sprites'],
     );

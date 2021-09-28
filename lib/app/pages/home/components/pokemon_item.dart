@@ -66,7 +66,9 @@ class PokemonItem extends StatelessWidget {
                             )
                             .toList(),
                       ),
-                      PokemonFavorite(),
+                      PokemonFavorite(
+                        pokemon: pokemon,
+                      ),
                     ],
                   ),
                 ],

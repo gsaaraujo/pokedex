@@ -37,7 +37,7 @@ class PokemonRepository implements IPokemonRepositoryInterface {
         return pokemonCollectionModel;
       }
     } catch (e) {
-      throw Exception('Error: $e');
+      Future.error('Error: $e');
     }
   }
 }
