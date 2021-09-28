@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/models/user_model.dart';
+import 'package:pokedex/app/pages/bottom_navigation/bottom_navigation_page.dart';
 import 'package:pokedex/app/pages/pokemon_details/pokemon_details_page.dart';
 import 'package:provider/provider.dart';
 import 'package:pokedex/app/pages/home/home_page.dart';
@@ -32,7 +33,7 @@ class WrapperWidget extends StatelessWidget {
     if (user == null) {
       return const LoginPage();
     } else {
-      return const HomePage();
+      return const BottomNavigationPage();
     }
   }
 }

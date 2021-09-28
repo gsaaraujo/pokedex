@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pokedex/app/constants/app_colors.dart';
+import 'package:pokedex/app/pages/bottom_navigation/bottom_navigation_page.dart';
 import 'package:pokedex/app/pages/home/home_controller.dart';
 import 'package:pokedex/app/pages/home/home_page.dart';
 import 'package:provider/provider.dart';

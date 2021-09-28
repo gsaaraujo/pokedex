@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     final _controller = context.watch<HomeController>();
-    final _user = context.watch<UserModel>();
+    final _user = context.watch<UserModel?>();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                             },
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(5),
-                              child: _user.photoURL == null
+                              child: _user!.photoURL == null
                                   ? Image.asset(
                                       AppAssetsPath.defaultUserPhotoJpg,
                                       width: 48,
