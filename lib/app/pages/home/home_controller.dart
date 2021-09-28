@@ -11,35 +11,37 @@ import 'package:pokedex/app/services/auth_services.dart';
 class HomeController extends ChangeNotifier {
   final FirebaseAuth auth = FirebaseAuth.instance;
   final GoogleSignIn google = GoogleSignIn();
-  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=3';
+  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=30';
+
+  List<PokemonModel>? pokemonCollection;
+  late Future<List<PokemonModel>> pokemonCollectionCopy;
   bool isAuthFailed = false;
   bool isLoading = false;
-  String _textField = '';
+  String textField = '';
   Timer? timer;
 
-  textField(String text) async {
-    _textField = text;
+  handleTextField(String text) {
+    List<PokemonModel>? copy = pokemonCollection;
+    textField = text;
 
-    if (timer != null) {
-      timer!.cancel();
-    }
+    RegExp regex = RegExp(textField, caseSensitive: false);
 
-    timer = Timer(const Duration(milliseconds: 500), () {
-      _textField = text;
-      notifyListeners();
-    });
+    copy = copy!.where((element) => regex.hasMatch(element.name)).toList();
+
+    pokemonCollectionCopy = Future.value(copy);
+    notifyListeners();
   }
 
   Future<List<PokemonModel>?> getPokemonCollection() async {
-    RegExp regex = RegExp(_textField, caseSensitive: false);
+    try {
+      var result =
+          await PokemonRepository(pokemonUrlCollection).getPokemonCollection();
 
-    var result =
-        await PokemonRepository(pokemonUrlCollection).getPokemonCollection();
-
-    var match =
-        result!.where((element) => regex.hasMatch(element.name)).toList();
-
-    return match;
+      pokemonCollection = result;
+      return result;
+    } catch (e) {
+      return Future.error('Error: $e');
+    }
   }
 
   Future<void> signOut() async {
