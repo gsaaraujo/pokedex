@@ -76,7 +76,6 @@ class FavoritesItem extends StatelessWidget {
                     ),
                   ],
                 ),
-                PokemonFavorite(pokemon: pokemon)
               ],
             ),
           ),
