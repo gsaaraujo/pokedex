@@ -13,7 +13,7 @@ class HomeController extends ChangeNotifier {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final GoogleSignIn _google = GoogleSignIn();
-  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=30';
+  final pokemonUrlCollection = 'https://pokeapi.co/api/v2/pokemon?limit=10';
 
   List<PokemonModel>? pokemonCollection;
   late Future<List<PokemonModel>> pokemonCollectionCopy;

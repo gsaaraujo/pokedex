@@ -18,7 +18,6 @@ class _PokemonFavoriteState extends State<PokemonFavorite> {
   final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   late PokemonFavoriteRepository _controller;
-  late Future<Map<String, dynamic>?> _favoriteNames;
   bool isFavorite = false;
 
   @override
@@ -26,6 +25,17 @@ class _PokemonFavoriteState extends State<PokemonFavorite> {
     super.initState();
 
     _controller = PokemonFavoriteRepository(_firebaseFirestore, _firebaseAuth);
+
+    _controller.getFavoritePokemon().then((value) {
+      setState(() {
+        for (var each in value) {
+          if (each.name == widget.pokemon.name) {
+            isFavorite = true;
+            break;
+          }
+        }
+      });
+    });
   }
 
   @override
