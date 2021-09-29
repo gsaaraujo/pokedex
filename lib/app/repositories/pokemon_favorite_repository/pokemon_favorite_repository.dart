@@ -53,13 +53,18 @@ class PokemonFavoriteRepository implements IPokemonFavoriteRepositoryInterface {
     }
   }
 
-  Future<Map<String, dynamic>?> getFavoritePokemon() async {
+  @override
+  Future<List<PokemonModel>> getFavoritePokemon() async {
     User? currentUser = firebaseAuth.currentUser;
+    List<PokemonModel>? pokemonList = [];
 
     var reference = firebaseFirestore.collection('users').doc(currentUser!.uid);
-
     var pokemonCollection = await reference.get();
 
-    return pokemonCollection.data();
+    pokemonCollection.data()!.forEach((key, value) {
+      value.forEach((each) => pokemonList.add(PokemonModel.fromMap(each)));
+    });
+
+    return pokemonList;
   }
 }

@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pokedex/app/components/pokemon_favorite.dart';
 import 'package:pokedex/app/constants/app_text_styles.dart';
+import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/utils/pokemon_type_colors.dart';
 
 class FavoritesItem extends StatelessWidget {
   FavoritesItem({Key? key, required this.pokemon}) : super(key: key);
 
-  Map<String, dynamic>? pokemon;
+  PokemonModel pokemon;
 
   @override
   Widget build(BuildContext context) {
     List<Color> colors = [];
 
-    for (var each in pokemon!['types']) {
+    for (var each in pokemon.types) {
       for (var type in PokemonTypeColors.type) {
         if (each['type']['name'] == type['type']) {
           colors.add(type['color']);
@@ -37,7 +38,7 @@ class FavoritesItem extends StatelessWidget {
             width: 75,
             height: 75,
             child: SvgPicture.network(
-              pokemon!['sprites'],
+              pokemon.sprites,
               fit: BoxFit.contain,
             ),
           ),
@@ -48,13 +49,13 @@ class FavoritesItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  pokemon!['name'].toString()[0].toUpperCase() +
-                      pokemon!['name'].substring(1).toLowerCase(),
+                  pokemon.name.toString()[0].toUpperCase() +
+                      pokemon.name.substring(1).toLowerCase(),
                   style: AppTextStyles.pokemonCollectionTitle,
                 ),
                 Row(
                   children: [
-                    ...pokemon!['types']
+                    ...pokemon.types
                         .map<Widget>((type) => Text(
                               type['type']['name'].toString()[0].toUpperCase() +
                                   type['type']['name']

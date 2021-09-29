@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/app/constants/app_colors.dart';
 import 'package:pokedex/app/constants/app_text_styles.dart';
+import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/pages/favorites/components/favorites_item.dart';
 import 'package:pokedex/app/pages/favorites/favorites_controller.dart';
 
@@ -12,7 +13,7 @@ class FavoritesPage extends StatefulWidget {
 }
 
 class _FavoritesPageState extends State<FavoritesPage> {
-  Future<Map<String, dynamic>?>? _pokemonFavorite;
+  Future<List<PokemonModel>>? _pokemonFavorite;
 
   @override
   void initState() {
@@ -39,17 +40,16 @@ class _FavoritesPageState extends State<FavoritesPage> {
           ),
           const SizedBox(height: 40),
           Expanded(
-            child: FutureBuilder<Map<String, dynamic>?>(
+            child: FutureBuilder<List<PokemonModel>>(
               future: _pokemonFavorite,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
                     return ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemCount: snapshot.data!['favorites'].length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return FavoritesItem(
-                              pokemon: snapshot.data!['favorites'][index]);
+                          return FavoritesItem(pokemon: snapshot.data![index]);
                         });
                   } else if (snapshot.hasError) {
                     return Center(
