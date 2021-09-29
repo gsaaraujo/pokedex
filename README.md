@@ -8,7 +8,7 @@
 
 ##
 
-![alt GiveMeHome](.github/cover.png)
+![alt GiveMeHome](.github/coverPoke.png)
 
 ## 💡 Purpose
 
