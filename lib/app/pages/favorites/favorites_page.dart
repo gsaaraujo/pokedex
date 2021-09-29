@@ -45,6 +45,11 @@ class _FavoritesPageState extends State<FavoritesPage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasData) {
+                    if (snapshot.data!.isEmpty) {
+                      return Center(
+                          child: Text('No favorites added',
+                              style: AppTextStyles.heading));
+                    }
                     return ListView.builder(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         itemCount: snapshot.data!.length,

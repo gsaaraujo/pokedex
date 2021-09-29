@@ -6,9 +6,9 @@ import 'package:pokedex/app/models/pokemon_model.dart';
 import 'package:pokedex/app/utils/pokemon_type_colors.dart';
 
 class FavoritesItem extends StatelessWidget {
-  FavoritesItem({Key? key, required this.pokemon}) : super(key: key);
+  const FavoritesItem({Key? key, required this.pokemon}) : super(key: key);
 
-  PokemonModel pokemon;
+  final PokemonModel pokemon;
 
   @override
   Widget build(BuildContext context) {
@@ -44,31 +44,39 @@ class FavoritesItem extends StatelessWidget {
           ),
           const SizedBox(width: 15),
           Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
               children: [
-                Text(
-                  pokemon.name.toString()[0].toUpperCase() +
-                      pokemon.name.substring(1).toLowerCase(),
-                  style: AppTextStyles.pokemonCollectionTitle,
-                ),
-                Row(
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    ...pokemon.types
-                        .map<Widget>((type) => Text(
-                              type['type']['name'].toString()[0].toUpperCase() +
+                    Text(
+                      pokemon.name.toString()[0].toUpperCase() +
+                          pokemon.name.substring(1).toLowerCase(),
+                      style: AppTextStyles.pokemonCollectionTitle,
+                    ),
+                    Row(
+                      children: [
+                        ...pokemon.types
+                            .map<Widget>((type) => Text(
                                   type['type']['name']
-                                      .substring(1)
-                                      .toLowerCase() +
-                                  ' ',
-                              style: AppTextStyles.pokemonCollectionSubtitle,
-                              textAlign: TextAlign.start,
-                            ))
-                        .toList(),
-                    // PokemonFavorite(pokemon: pokemon)
+                                          .toString()[0]
+                                          .toUpperCase() +
+                                      type['type']['name']
+                                          .substring(1)
+                                          .toLowerCase() +
+                                      ' ',
+                                  style:
+                                      AppTextStyles.pokemonCollectionSubtitle,
+                                  textAlign: TextAlign.start,
+                                ))
+                            .toList(),
+                        // PokemonFavorite(pokemon: pokemon)
+                      ],
+                    ),
                   ],
                 ),
+                PokemonFavorite(pokemon: pokemon)
               ],
             ),
           ),

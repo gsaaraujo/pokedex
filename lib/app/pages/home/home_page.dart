@@ -158,10 +158,11 @@ class _HomePageState extends State<HomePage> {
                                 vertical: 0, horizontal: 20),
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    crossAxisSpacing: 20,
-                                    mainAxisSpacing: 20,
-                                    childAspectRatio: 0.7375),
+                              crossAxisCount: 2,
+                              crossAxisSpacing: 20,
+                              mainAxisSpacing: 20,
+                              childAspectRatio: 0.7375,
+                            ),
                             itemCount: snapshot.data!.length,
                             itemBuilder: (context, index) {
                               return PokemonItem(
