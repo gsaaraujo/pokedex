@@ -55,7 +55,10 @@ Type **flutter pub get** to install all dependencies.
 After, run:
 
 ```
-flutter run
+flutter run --release
+
 ```
+
+Before running the app, you need to register the app and set your own credentials on [Firebase Console ](https://firebase.google.com/).
 
 This app works for Android only.
